@@ -12,7 +12,7 @@ build_b=$(cat $4)
 
 echo $RUNTIME_CI_LINK
 
-current=$(runtime device state -g rt-test -d f5f3e2eb64502638a4224861972c717a | jq -r .build_id)
+current=$(runtime device state -g $dg -d $hwid | jq -r .build_id)
 
 if [[ $current = $build_a ]]; then
     runtime job fwup -g $dg -d $hwid -i $build_b -w --timeout=20m
