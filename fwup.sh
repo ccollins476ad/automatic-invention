@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
 if [[ $# -lt 5 ]]; then
     echo "Usage: $0 <device group> <hardware ID> <build ID file 1> <build ID file 2> <build ID file 3>"
