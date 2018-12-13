@@ -30,5 +30,5 @@ if [[ $current = $build_a ]]; then
 elif [[ $current = $build_b ]]; then
     run_upgrade $dg $hwid $build_c
 else 
-    run_upgrade $dg $hwid $build_b
+    run_upgrade $dg $hwid $build_a
 fi
