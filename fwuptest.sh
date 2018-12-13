@@ -16,7 +16,7 @@ echo $RUNTIME_CI_LINK
 current=$(runtime device state -g $dg -d $hwid | jq -r .build_id)
 
 function run_upgrade {
-    if fwup_out=$(runtime job fwup -g $1 -d $2 -i $3 -w --timeout=20min); then
+    if fwup_out=$(runtime job fwup -g $1 -d $2 -i $3 -w --timeout=20m); then
         echo "Success: $fwup_out"
     else 
         err=${fwup_out#"error: "}
