@@ -19,8 +19,7 @@ function run_upgrade {
     if fwup_out=$(runtime job fwup -g $1 -d $2 -i $3 -w --timeout=20m); then
         echo "Success: $fwup_out"
     else 
-        err=${fwup_out#"error: "}
-        echo "error from gateway: $err"
+        echo "error from gateway: $fwup_out"
         exit 1
     fi
 }
