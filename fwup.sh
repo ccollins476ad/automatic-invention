@@ -17,9 +17,9 @@ current=$(runtime device state -g $dg -d $hwid | jq -r .build_id)
 echo $current
 
 if [[ $current = $build_a ]]; then
-    runtime job fwup -g $dg -d $hwid -i $build_b -w --timeout=20m
+    runtime job fwup -g $dg -d $hwid -i $build_b -w --timeout=25m
 elif [[ $current = $build_b ]]; then
-    runtime job fwup -g $dg -d $hwid -i $build_c -w --timeout=20m
+    runtime job fwup -g $dg -d $hwid -i $build_c -w --timeout=25m
 else 
-    runtime job fwup -g $dg -d $hwid -i $build_a -w --timeout=20m
+    runtime job fwup -g $dg -d $hwid -i $build_a -w --timeout=25m
 fi
