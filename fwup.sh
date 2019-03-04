@@ -14,12 +14,20 @@ build_c=$(cat $5)
 echo $RUNTIME_CI_LINK
 
 current=$(runtime device state -g $dg -d $hwid | jq -r .build_id)
-echo $current
+
+function run_upgrade {
+    if fwup_out=$(runtime job fwup -g $1 -d $2 -i $3 -w --timeout=25m); then
+        echo "Success: $fwup_out"
+    else 
+        echo "error from gateway: $fwup_out"
+        exit 1
+    fi
+}
 
 if [[ $current = $build_a ]]; then
-    runtime job fwup -g $dg -d $hwid -i $build_b -w --timeout=25m
+    run_upgrade $dg $hwid $build_b
 elif [[ $current = $build_b ]]; then
-    runtime job fwup -g $dg -d $hwid -i $build_c -w --timeout=25m
+    run_upgrade $dg $hwid $build_c
 else 
-    runtime job fwup -g $dg -d $hwid -i $build_a -w --timeout=25m
+    run_upgrade $dg $hwid $build_a
 fi
