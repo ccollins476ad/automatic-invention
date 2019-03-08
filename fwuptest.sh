@@ -17,7 +17,9 @@ current=$(runtime device state -g $dg -d $hwid | jq -r .build_id)
 
 function run_upgrade {
     if fwup_out=$(runtime job fwup -g $1 -d $2 -i $3 -w --timeout=25m); then
+        fwup_out=${fwup_out#*:}
         echo "Success: $fwup_out"
+        runtime job taskresult -d $hwid -j $fwup_out
     else 
         echo "error from gateway: $fwup_out"
         exit 1
