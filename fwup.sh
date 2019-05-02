@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 if [[ $# -lt 5 ]]; then
-    echo "Usage: $0 <device group> <hardware ID> <build ID file 1> <build ID file 2> <build ID file 3>"
+    echo "Usage: $0 <device group> <hardware ID> <build ID file 1> <build ID file 2>"
     exit 1
 fi
 
@@ -9,7 +9,6 @@ dg=$1
 hwid=$2
 build_a=$(cat $3)
 build_b=$(cat $4)
-build_c=$(cat $5)
 
 echo $RUNTIME_CI_LINK
 
@@ -26,8 +25,6 @@ function run_upgrade {
 
 if [[ $current = $build_a ]]; then
     run_upgrade $dg $hwid $build_b
-elif [[ $current = $build_b ]]; then
-    run_upgrade $dg $hwid $build_c
 else 
     run_upgrade $dg $hwid $build_a
 fi
